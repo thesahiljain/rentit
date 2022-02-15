@@ -1,0 +1,25 @@
+{
+  "name": "rentit",
+  "version": "1.0.0",
+  "description": "an app to rent and borrow stuff and save money!",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thesahiljain/rentit.git"
+  },
+  "author": "thesahiljain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thesahiljain/rentit/issues"
+  },
+  "homepage": "https://github.com/thesahiljain/rentit#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "joi": "^17.6.0",
+    "mongoose": "^6.2.1"
+  }
+}
