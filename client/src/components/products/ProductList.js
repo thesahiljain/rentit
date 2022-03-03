@@ -1,9 +1,17 @@
 import { Link } from "react-router-dom";
 import Product from "./Product";
-import ProductH from "./ProductH";
-import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ScrollToTopOnMount from "./ScrollToTopOnMount";
+
+const products = [
+  {name: "Product A", price: 100},
+  {name: "Product B", price: 20},
+  {name: "Product C", price: 500},
+  {name: "Product D", price: 67},
+  {name: "Product E", price: 33},
+  {name: "Product F", price: 990},
+  {name: "Product G", price: 15},
+]
 
 const categories = [
   "All Products",
@@ -20,6 +28,7 @@ const manufacturers = ["HOCO", "Nillkin", "Remax", "Baseus"];
 
 function FilterMenuLeft() {
   return (
+    <>
     <ul className="list-group list-group-flush rounded">
       <li className="list-group-item d-none d-lg-block">
         <h5 className="mt-1 mb-2">Browse</h5>
@@ -38,6 +47,7 @@ function FilterMenuLeft() {
           })}
         </div>
       </li>
+
       <li className="list-group-item">
         <h5 className="mt-1 mb-1">Brands</h5>
         <div className="d-flex flex-column">
@@ -93,37 +103,15 @@ function FilterMenuLeft() {
         </div>
       </li>
     </ul>
+    </>
   );
 }
 
 function ProductList() {
-  const [viewType, setViewType] = useState({ grid: true });
-
-  function changeViewType() {
-    setViewType({
-      grid: !viewType.grid,
-    });
-  }
 
   return (
     <div className="container mt-5 py-4 px-xl-5">
       <ScrollToTopOnMount />
-      <nav aria-label="breadcrumb" className="bg-custom-light rounded">
-        <ol className="breadcrumb p-3 mb-0">
-          <li className="breadcrumb-item">
-            <Link
-              className="text-decoration-none link-secondary"
-              to="/products"
-              replace
-            >
-              All Prodcuts
-            </Link>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            Cases &amp; Covers
-          </li>
-        </ol>
-      </nav>
 
       <div className="h-scroller d-block d-lg-none">
         <nav className="nav h-underline">
@@ -182,62 +170,40 @@ function ProductList() {
         <div className="col-lg-9">
           <div className="d-flex flex-column h-100">
             <div className="row mb-3">
-              <div className="col-lg-3 d-none d-lg-block">
-                <select
-                  className="form-select"
-                  aria-label="Default select example"
-                  defaultValue=""
-                >
-                  <option value="">All Models</option>
-                  <option value="1">iPhone X</option>
-                  <option value="2">iPhone Xs</option>
-                  <option value="3">iPhone 11</option>
-                </select>
-              </div>
-              <div className="col-lg-9 col-xl-5 offset-xl-4 d-flex flex-row">
+              <div className="col-lg-12 d-flex flex-row">
                 <div className="input-group">
                   <input
                     className="form-control"
                     type="text"
-                    placeholder="Search products..."
+                    placeholder="What do you wanna rent today?"
                     aria-label="search input"
                   />
                   <button className="btn btn-outline-dark">
                     <FontAwesomeIcon icon={["fas", "search"]} />
                   </button>
                 </div>
-                <button
-                  className="btn btn-outline-dark ms-2 d-none d-lg-inline"
-                  onClick={changeViewType}
-                >
-                  <FontAwesomeIcon
-                    icon={["fas", viewType.grid ? "th-list" : "th-large"]}
-                  />
-                </button>
               </div>
             </div>
             <div
               className={
-                "row row-cols-1 row-cols-md-2 row-cols-lg-2 g-3 mb-4 flex-shrink-0 " +
-                (viewType.grid ? "row-cols-xl-3" : "row-cols-xl-2")
+                "row row-cols-1 row-cols-md-2 row-cols-lg-2 g-3 mb-4 flex-shrink-0 row-cols-xl-3"
               }
             >
-              {Array.from({ length: 10 }, (_, i) => {
-                if (viewType.grid) {
+
+              {
+                products.map((p, i) => {
                   return (
-                    <div>
-                    <Product key={i} percentOff={i % 2 === 0 ? 15 : null} />
-                    </div>
+                    <Product key={i} product_name={p.name} price={`$${p.price}`} />
                   );
-                }
-                return (
-                  <ProductH key={i} percentOff={i % 4 === 0 ? 15 : null} />
-                );
-              })}
+                })
+              }
+
             </div>
+
+            {/* Updates required based on number of pages */}
             <div className="d-flex align-items-center mt-auto">
               <span className="text-muted small d-none d-md-inline">
-                Showing 10 of 100
+                Showing 9 of 100
               </span>
               <nav aria-label="Page navigation example" className="ms-auto">
                 <ul className="pagination my-0">
