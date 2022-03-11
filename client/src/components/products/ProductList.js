@@ -4,36 +4,35 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ScrollToTopOnMount from "./ScrollToTopOnMount";
 
 const products = [
-  {name: "Product A", price: 100},
-  {name: "Product B", price: 20},
-  {name: "Product C", price: 500},
-  {name: "Product D", price: 67},
-  {name: "Product E", price: 33},
-  {name: "Product F", price: 990},
-  {name: "Product G", price: 15},
+  {name: "Product B", price: 20, image_url: "https://cdn.vox-cdn.com/thumbor/RZ2VTtZu8u-8hDclDfLGYKCaSfU=/0x106:2040x1254/1600x900/cdn.vox-cdn.com/uploads/chorus_image/image/70218969/bfarsace_211129_4901_0006.0.jpg"},
+  {name: "Product C", price: 500, image_url: "https://m.media-amazon.com/images/I/61bijEgI8WL._AC_SS450_.jpg"},
+  {name: "Product D", price: 67, image_url: "https://media.wired.com/photos/5d09594a62bcb0c9752779d9/16:9/w_2000,h_1125,c_limit/Transpo_G70_TA-518126.jpg"},
+  {name: "Product G", price: 15, image_url: "https://media.wired.com/photos/5d09594a62bcb0c9752779d9/16:9/w_2000,h_1125,c_limit/Transpo_G70_TA-518126.jpg"},
+  {name: "Product E", price: 33, image_url: "https://cdn.vox-cdn.com/thumbor/RZ2VTtZu8u-8hDclDfLGYKCaSfU=/0x106:2040x1254/1600x900/cdn.vox-cdn.com/uploads/chorus_image/image/70218969/bfarsace_211129_4901_0006.0.jpg"},
+  {name: "Product F", price: 990, image_url: "https://m.media-amazon.com/images/I/61bijEgI8WL._AC_SS450_.jpg"},
 ]
 
-const categories = [
-  "All Products",
-  "Phones & Tablets",
-  "Cases & Covers",
-  "Screen Guards",
-  "Cables & Chargers",
-  "Power Banks",
+const locations = [
+  "Irvine",
+  "Newport",
+  "Tustin",
+  "Costa Mesa",
+  "Santa Ana",
+  "Aliso Viejo"
 ];
 
-const brands = ["Apple", "Samsung", "Google", "HTC"];
+const distances = [1, 2, 3, 5, 10];
 
-const manufacturers = ["HOCO", "Nillkin", "Remax", "Baseus"];
+const availability = ["Available now", "Available soon"];
 
 function FilterMenuLeft() {
   return (
     <>
     <ul className="list-group list-group-flush rounded">
       <li className="list-group-item d-none d-lg-block">
-        <h5 className="mt-1 mb-2">Browse</h5>
+        <h5 className="mt-1 mb-2">Distance</h5>
         <div className="d-flex flex-wrap my-2">
-          {categories.map((v, i) => {
+          {distances.map((v, i) => {
             return (
               <Link
                 key={i}
@@ -41,7 +40,7 @@ function FilterMenuLeft() {
                 className="btn btn-sm btn-outline-dark rounded-pill me-2 mb-2"
                 replace
               >
-                {v}
+                {`${v} miles`}
               </Link>
             );
           })}
@@ -49,9 +48,9 @@ function FilterMenuLeft() {
       </li>
 
       <li className="list-group-item">
-        <h5 className="mt-1 mb-1">Brands</h5>
+        <h5 className="mt-1 mb-1">Locations</h5>
         <div className="d-flex flex-column">
-          {brands.map((v, i) => {
+          {locations.map((v, i) => {
             return (
               <div key={i} className="form-check">
                 <input className="form-check-input" type="checkbox" />
@@ -64,9 +63,9 @@ function FilterMenuLeft() {
         </div>
       </li>
       <li className="list-group-item">
-        <h5 className="mt-1 mb-1">Manufacturers</h5>
+        <h5 className="mt-1 mb-1">Availability</h5>
         <div className="d-flex flex-column">
-          {manufacturers.map((v, i) => {
+          {availability.map((v, i) => {
             return (
               <div key={i} className="form-check">
                 <input className="form-check-input" type="checkbox" />
@@ -115,7 +114,7 @@ function ProductList() {
 
       <div className="h-scroller d-block d-lg-none">
         <nav className="nav h-underline">
-          {categories.map((v, i) => {
+          {distances.map((v, i) => {
             return (
               <div key={i} className="h-link me-2">
                 <Link
@@ -193,7 +192,7 @@ function ProductList() {
               {
                 products.map((p, i) => {
                   return (
-                    <Product key={i} product_name={p.name} price={`$${p.price}`} />
+                    <Product key={i} product_name={p.name} price={`$${p.price}`} image_url={p.image_url}/>
                   );
                 })
               }
@@ -203,7 +202,7 @@ function ProductList() {
             {/* Updates required based on number of pages */}
             <div className="d-flex align-items-center mt-auto">
               <span className="text-muted small d-none d-md-inline">
-                Showing 9 of 100
+                Showing 6 of 100
               </span>
               <nav aria-label="Page navigation example" className="ms-auto">
                 <ul className="pagination my-0">

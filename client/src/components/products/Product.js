@@ -1,4 +1,3 @@
-import Image from "../../res/img/couch.jpg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -12,7 +11,7 @@ function Product(props) {
             className="card-img-top bg-dark cover"
             height="200"
             alt=""
-            src={Image}
+            src={props.image_url}
           />
         </Link>
         <div className="card-body">
